@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title ? `${title} · EMS` : "EMS" %></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="min-h-screen bg-slate-50 text-slate-900">
+    <header class="border-b bg-white">
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+        <a href="<%= currentUser ? '/dashboard' : '/' %>" class="font-semibold tracking-tight">
+          EMS
+          <span class="text-slate-400 font-normal">Employee Management</span>
+        </a>
+
+        <% if (currentUser) { %>
+          <nav class="flex items-center gap-3 text-sm">
+            <a class="rounded px-2 py-1 hover:bg-slate-100" href="/dashboard">Dashboard</a>
+            <a class="rounded px-2 py-1 hover:bg-slate-100" href="/employees">Employees</a>
+            <a class="rounded px-2 py-1 hover:bg-slate-100" href="/departments">Departments</a>
+            <a class="rounded px-2 py-1 hover:bg-slate-100" href="/roles">Roles</a>
+            <div class="h-5 w-px bg-slate-200"></div>
+            <div class="text-slate-600">Hi, <%= currentUser.displayName %></div>
+            <form method="post" action="/logout">
+              <button class="rounded bg-slate-900 px-3 py-1.5 text-white hover:bg-slate-800" type="submit">
+                Logout
+              </button>
+            </form>
+          </nav>
+        <% } %>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-4 py-6">
+      <% if (flash) { %>
+        <div class="mb-5 rounded border px-4 py-3
+          <%= flash.type === 'success'
+            ? 'border-emerald-200 bg-emerald-50 text-emerald-900'
+            : 'border-rose-200 bg-rose-50 text-rose-900' %>">
+          <%= flash.message %>
+        </div>
+      <% } %>
+

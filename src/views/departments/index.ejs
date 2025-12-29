@@ -1,0 +1,50 @@
+<%- include("../partials/top", { title }) %>
+
+<div class="flex items-end justify-between gap-4">
+  <div>
+    <h1 class="text-2xl font-semibold">Departments</h1>
+    <p class="mt-1 text-sm text-slate-600">Define the teams in your organization.</p>
+  </div>
+  <a href="/departments/new" class="rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-slate-800">
+    Add department
+  </a>
+</div>
+
+<div class="mt-5 overflow-hidden rounded-xl border bg-white shadow-sm">
+  <table class="w-full text-left text-sm">
+    <thead class="bg-slate-50 text-slate-600">
+      <tr>
+        <th class="px-4 py-3 font-medium">Department</th>
+        <th class="px-4 py-3 font-medium">Employees</th>
+        <th class="px-4 py-3 font-medium"></th>
+      </tr>
+    </thead>
+    <tbody class="divide-y">
+      <% if (departments.length === 0) { %>
+        <tr><td class="px-4 py-6 text-slate-600" colspan="3">No departments yet.</td></tr>
+      <% } %>
+      <% departments.forEach((d) => { %>
+        <tr class="hover:bg-slate-50">
+          <td class="px-4 py-3">
+            <div class="font-medium"><%= d.name %></div>
+            <div class="text-slate-600"><%= d.description || "—" %></div>
+          </td>
+          <td class="px-4 py-3 text-slate-700"><%= d.employee_count %></td>
+          <td class="px-4 py-3 text-right">
+            <a class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium hover:bg-slate-50" href="/departments/<%= d.id %>/edit">
+              Edit
+            </a>
+            <form class="ml-2 inline" method="post" action="/departments/<%= d.id %>?_method=DELETE" onsubmit="return confirm('Delete this department?');">
+              <button class="rounded-lg border border-rose-300 bg-rose-50 px-3 py-1.5 text-sm font-medium text-rose-800 hover:bg-rose-100" type="submit">
+                Delete
+              </button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include("../partials/bottom") %>
+

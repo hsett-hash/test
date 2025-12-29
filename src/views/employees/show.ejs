@@ -1,0 +1,72 @@
+<%- include("../partials/top", { title }) %>
+
+<div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+  <div>
+    <h1 class="text-2xl font-semibold"><%= employee.first_name %> <%= employee.last_name %></h1>
+    <p class="mt-1 text-sm text-slate-600"><%= employee.email %></p>
+  </div>
+  <div class="flex items-center gap-2">
+    <a class="rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm font-medium hover:bg-slate-50" href="/employees">
+      Back
+    </a>
+    <a class="rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-slate-800" href="/employees/<%= employee.id %>/edit">
+      Edit
+    </a>
+  </div>
+</div>
+
+<div class="mt-5 grid gap-4 lg:grid-cols-3">
+  <div class="rounded-xl border bg-white p-6 shadow-sm lg:col-span-2">
+    <h2 class="text-sm font-semibold text-slate-700">Details</h2>
+    <dl class="mt-4 grid gap-3 sm:grid-cols-2">
+      <div>
+        <dt class="text-xs uppercase tracking-wide text-slate-500">Phone</dt>
+        <dd class="mt-1 text-sm"><%= employee.phone || "—" %></dd>
+      </div>
+      <div>
+        <dt class="text-xs uppercase tracking-wide text-slate-500">Status</dt>
+        <dd class="mt-1 text-sm"><%= employee.status %></dd>
+      </div>
+      <div>
+        <dt class="text-xs uppercase tracking-wide text-slate-500">Department</dt>
+        <dd class="mt-1 text-sm"><%= employee.department_name || "—" %></dd>
+      </div>
+      <div>
+        <dt class="text-xs uppercase tracking-wide text-slate-500">Role</dt>
+        <dd class="mt-1 text-sm"><%= employee.role_name || "—" %></dd>
+      </div>
+      <div>
+        <dt class="text-xs uppercase tracking-wide text-slate-500">Hire date</dt>
+        <dd class="mt-1 text-sm"><%= employee.hire_date || "—" %></dd>
+      </div>
+      <div>
+        <dt class="text-xs uppercase tracking-wide text-slate-500">Updated</dt>
+        <dd class="mt-1 text-sm"><%= employee.updated_at %></dd>
+      </div>
+    </dl>
+
+    <div class="mt-6">
+      <div class="text-xs uppercase tracking-wide text-slate-500">Notes</div>
+      <div class="mt-2 whitespace-pre-wrap rounded-lg bg-slate-50 p-3 text-sm text-slate-700">
+        <%= employee.notes || "—" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="rounded-xl border bg-white p-6 shadow-sm">
+    <h2 class="text-sm font-semibold text-slate-700">Actions</h2>
+    <div class="mt-4 space-y-2">
+      <a class="block rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm font-medium hover:bg-slate-50" href="/employees/<%= employee.id %>/edit">
+        Edit employee
+      </a>
+      <form method="post" action="/employees/<%= employee.id %>?_method=DELETE" onsubmit="return confirm('Delete this employee?');">
+        <button class="w-full rounded-lg border border-rose-300 bg-rose-50 px-4 py-2.5 text-sm font-medium text-rose-800 hover:bg-rose-100" type="submit">
+          Delete employee
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<%- include("../partials/bottom") %>
+

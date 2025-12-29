@@ -1,0 +1,49 @@
+<%- include("partials/top", { title }) %>
+
+<div class="mx-auto max-w-md">
+  <div class="rounded-xl border bg-white p-6 shadow-sm">
+    <h1 class="text-xl font-semibold">Sign in</h1>
+    <p class="mt-1 text-sm text-slate-600">Use your admin account to manage employees.</p>
+
+    <form method="post" action="/login" class="mt-5 space-y-4">
+      <div>
+        <label class="block text-sm font-medium">Username</label>
+        <input
+          class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-slate-900 focus:outline-none"
+          name="username"
+          autocomplete="username"
+          required
+        />
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Password</label>
+        <input
+          class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-slate-900 focus:outline-none"
+          type="password"
+          name="password"
+          autocomplete="current-password"
+          required
+        />
+      </div>
+
+      <button
+        class="w-full rounded-lg bg-slate-900 px-4 py-2.5 font-medium text-white hover:bg-slate-800"
+        type="submit"
+      >
+        Login
+      </button>
+    </form>
+
+    <div class="mt-4 rounded-lg bg-slate-50 p-3 text-sm text-slate-700">
+      <div class="font-medium">Default login</div>
+      <div class="mt-1">
+        <span class="text-slate-500">Username:</span> <code>admin</code>
+        <span class="mx-2 text-slate-300">|</span>
+        <span class="text-slate-500">Password:</span> <code>admin123</code>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include("partials/bottom") %>
+

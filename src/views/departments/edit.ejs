@@ -1,0 +1,29 @@
+<%- include("../partials/top", { title }) %>
+
+<div class="flex items-end justify-between gap-4">
+  <div>
+    <h1 class="text-2xl font-semibold">Edit department</h1>
+    <p class="mt-1 text-sm text-slate-600">Update department details.</p>
+  </div>
+  <a class="rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm font-medium hover:bg-slate-50" href="/departments">
+    Back
+  </a>
+</div>
+
+<div class="mt-5 rounded-xl border bg-white p-6 shadow-sm">
+  <form method="post" action="/departments/<%= department.id %>?_method=PUT">
+    <%- include("_form", { department }) %>
+
+    <div class="mt-6 flex items-center gap-2">
+      <button class="rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-slate-800" type="submit">
+        Save changes
+      </button>
+      <a class="rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm font-medium hover:bg-slate-50" href="/departments">
+        Cancel
+      </a>
+    </div>
+  </form>
+</div>
+
+<%- include("../partials/bottom") %>
+

@@ -1,0 +1,51 @@
+<%- include("partials/top", { title }) %>
+
+<div class="flex items-end justify-between gap-4">
+  <div>
+    <h1 class="text-2xl font-semibold">Dashboard</h1>
+    <p class="mt-1 text-sm text-slate-600">Quick overview of your employee data.</p>
+  </div>
+  <a
+    href="/employees/new"
+    class="rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-slate-800"
+  >
+    Add employee
+  </a>
+</div>
+
+<div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+  <div class="rounded-xl border bg-white p-5 shadow-sm">
+    <div class="text-sm text-slate-500">Employees</div>
+    <div class="mt-2 text-3xl font-semibold"><%= counts.employees %></div>
+  </div>
+  <div class="rounded-xl border bg-white p-5 shadow-sm">
+    <div class="text-sm text-slate-500">Active</div>
+    <div class="mt-2 text-3xl font-semibold"><%= counts.activeEmployees %></div>
+  </div>
+  <div class="rounded-xl border bg-white p-5 shadow-sm">
+    <div class="text-sm text-slate-500">Departments</div>
+    <div class="mt-2 text-3xl font-semibold"><%= counts.departments %></div>
+  </div>
+  <div class="rounded-xl border bg-white p-5 shadow-sm">
+    <div class="text-sm text-slate-500">Roles</div>
+    <div class="mt-2 text-3xl font-semibold"><%= counts.roles %></div>
+  </div>
+</div>
+
+<div class="mt-6 grid gap-4 lg:grid-cols-3">
+  <a href="/employees" class="rounded-xl border bg-white p-5 shadow-sm hover:bg-slate-50">
+    <div class="font-medium">Manage employees</div>
+    <div class="mt-1 text-sm text-slate-600">Create, update, and deactivate employees.</div>
+  </a>
+  <a href="/departments" class="rounded-xl border bg-white p-5 shadow-sm hover:bg-slate-50">
+    <div class="font-medium">Departments</div>
+    <div class="mt-1 text-sm text-slate-600">Organize employees by department.</div>
+  </a>
+  <a href="/roles" class="rounded-xl border bg-white p-5 shadow-sm hover:bg-slate-50">
+    <div class="font-medium">Roles</div>
+    <div class="mt-1 text-sm text-slate-600">Define roles and responsibilities.</div>
+  </a>
+</div>
+
+<%- include("partials/bottom") %>
+
