@@ -1,0 +1,32 @@
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "node src/server.js",
+    "start": "node src/server.js",
+    "db:init": "node src/scripts/init-db.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hsett-hash/test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hsett-hash/test/issues"
+  },
+  "homepage": "https://github.com/hsett-hash/test#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "better-sqlite3": "^12.5.0",
+    "connect-sqlite3": "^0.9.16",
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^5.2.1",
+    "express-session": "^1.18.2",
+    "method-override": "^3.0.0"
+  }
+}
