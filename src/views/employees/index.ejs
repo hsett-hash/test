@@ -1,0 +1,92 @@
+<%- include("../partials/top", { title }) %>
+
+<div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+  <div>
+    <h1 class="text-2xl font-semibold">Employees</h1>
+    <p class="mt-1 text-sm text-slate-600">Create and manage employee records.</p>
+  </div>
+  <a href="/employees/new" class="rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-slate-800">
+    Add employee
+  </a>
+</div>
+
+<form method="get" action="/employees" class="mt-5 rounded-xl border bg-white p-4 shadow-sm">
+  <div class="grid gap-3 sm:grid-cols-3">
+    <div class="sm:col-span-2">
+      <label class="block text-sm font-medium">Search</label>
+      <input
+        class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-slate-900 focus:outline-none"
+        name="q"
+        placeholder="Name or email…"
+        value="<%= filters.q %>"
+      />
+    </div>
+    <div>
+      <label class="block text-sm font-medium">Status</label>
+      <select
+        class="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 focus:border-slate-900 focus:outline-none"
+        name="status"
+      >
+        <option value="" <%= !filters.status ? 'selected' : '' %>>All</option>
+        <option value="Active" <%= filters.status === 'Active' ? 'selected' : '' %>>Active</option>
+        <option value="Inactive" <%= filters.status === 'Inactive' ? 'selected' : '' %>>Inactive</option>
+      </select>
+    </div>
+  </div>
+  <div class="mt-3 flex items-center gap-2">
+    <button class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800" type="submit">
+      Apply
+    </button>
+    <a class="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-medium hover:bg-slate-50" href="/employees">
+      Reset
+    </a>
+  </div>
+</form>
+
+<div class="mt-5 overflow-hidden rounded-xl border bg-white shadow-sm">
+  <table class="w-full text-left text-sm">
+    <thead class="bg-slate-50 text-slate-600">
+      <tr>
+        <th class="px-4 py-3 font-medium">Employee</th>
+        <th class="px-4 py-3 font-medium">Department</th>
+        <th class="px-4 py-3 font-medium">Role</th>
+        <th class="px-4 py-3 font-medium">Status</th>
+        <th class="px-4 py-3 font-medium"></th>
+      </tr>
+    </thead>
+    <tbody class="divide-y">
+      <% if (employees.length === 0) { %>
+        <tr>
+          <td class="px-4 py-6 text-slate-600" colspan="5">No employees found.</td>
+        </tr>
+      <% } %>
+      <% employees.forEach((e) => { %>
+        <tr class="hover:bg-slate-50">
+          <td class="px-4 py-3">
+            <div class="font-medium"><%= e.first_name %> <%= e.last_name %></div>
+            <div class="text-slate-600"><%= e.email %></div>
+          </td>
+          <td class="px-4 py-3 text-slate-700"><%= e.department_name || "—" %></td>
+          <td class="px-4 py-3 text-slate-700"><%= e.role_name || "—" %></td>
+          <td class="px-4 py-3">
+            <span class="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium
+              <%= e.status === 'Active' ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-700' %>">
+              <%= e.status %>
+            </span>
+          </td>
+          <td class="px-4 py-3 text-right">
+            <a class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium hover:bg-slate-50" href="/employees/<%= e.id %>">
+              View
+            </a>
+            <a class="ml-2 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium hover:bg-slate-50" href="/employees/<%= e.id %>/edit">
+              Edit
+            </a>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include("../partials/bottom") %>
+

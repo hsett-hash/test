@@ -1,0 +1,50 @@
+<%- include("../partials/top", { title }) %>
+
+<div class="flex items-end justify-between gap-4">
+  <div>
+    <h1 class="text-2xl font-semibold">Roles</h1>
+    <p class="mt-1 text-sm text-slate-600">Define job roles across departments.</p>
+  </div>
+  <a href="/roles/new" class="rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-slate-800">
+    Add role
+  </a>
+</div>
+
+<div class="mt-5 overflow-hidden rounded-xl border bg-white shadow-sm">
+  <table class="w-full text-left text-sm">
+    <thead class="bg-slate-50 text-slate-600">
+      <tr>
+        <th class="px-4 py-3 font-medium">Role</th>
+        <th class="px-4 py-3 font-medium">Employees</th>
+        <th class="px-4 py-3 font-medium"></th>
+      </tr>
+    </thead>
+    <tbody class="divide-y">
+      <% if (roles.length === 0) { %>
+        <tr><td class="px-4 py-6 text-slate-600" colspan="3">No roles yet.</td></tr>
+      <% } %>
+      <% roles.forEach((r) => { %>
+        <tr class="hover:bg-slate-50">
+          <td class="px-4 py-3">
+            <div class="font-medium"><%= r.name %></div>
+            <div class="text-slate-600"><%= r.description || "—" %></div>
+          </td>
+          <td class="px-4 py-3 text-slate-700"><%= r.employee_count %></td>
+          <td class="px-4 py-3 text-right">
+            <a class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium hover:bg-slate-50" href="/roles/<%= r.id %>/edit">
+              Edit
+            </a>
+            <form class="ml-2 inline" method="post" action="/roles/<%= r.id %>?_method=DELETE" onsubmit="return confirm('Delete this role?');">
+              <button class="rounded-lg border border-rose-300 bg-rose-50 px-3 py-1.5 text-sm font-medium text-rose-800 hover:bg-rose-100" type="submit">
+                Delete
+              </button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include("../partials/bottom") %>
+

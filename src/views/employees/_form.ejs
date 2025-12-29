@@ -1,0 +1,95 @@
+<div class="grid gap-4 sm:grid-cols-2">
+  <div>
+    <label class="block text-sm font-medium">First name</label>
+    <input
+      class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-slate-900 focus:outline-none"
+      name="first_name"
+      value="<%= employee.first_name || '' %>"
+      required
+    />
+  </div>
+  <div>
+    <label class="block text-sm font-medium">Last name</label>
+    <input
+      class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-slate-900 focus:outline-none"
+      name="last_name"
+      value="<%= employee.last_name || '' %>"
+      required
+    />
+  </div>
+  <div>
+    <label class="block text-sm font-medium">Email</label>
+    <input
+      class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-slate-900 focus:outline-none"
+      type="email"
+      name="email"
+      value="<%= employee.email || '' %>"
+      required
+    />
+  </div>
+  <div>
+    <label class="block text-sm font-medium">Phone</label>
+    <input
+      class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-slate-900 focus:outline-none"
+      name="phone"
+      value="<%= employee.phone || '' %>"
+    />
+  </div>
+  <div>
+    <label class="block text-sm font-medium">Department</label>
+    <select
+      class="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 focus:border-slate-900 focus:outline-none"
+      name="department_id"
+    >
+      <option value="">—</option>
+      <% departments.forEach((d) => { %>
+        <option value="<%= d.id %>" <%= String(employee.department_id || '') === String(d.id) ? 'selected' : '' %>>
+          <%= d.name %>
+        </option>
+      <% }) %>
+    </select>
+  </div>
+  <div>
+    <label class="block text-sm font-medium">Role</label>
+    <select
+      class="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 focus:border-slate-900 focus:outline-none"
+      name="role_id"
+    >
+      <option value="">—</option>
+      <% roles.forEach((r) => { %>
+        <option value="<%= r.id %>" <%= String(employee.role_id || '') === String(r.id) ? 'selected' : '' %>>
+          <%= r.name %>
+        </option>
+      <% }) %>
+    </select>
+  </div>
+  <div>
+    <label class="block text-sm font-medium">Status</label>
+    <select
+      class="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 focus:border-slate-900 focus:outline-none"
+      name="status"
+    >
+      <option value="Active" <%= employee.status === 'Active' ? 'selected' : '' %>>Active</option>
+      <option value="Inactive" <%= employee.status === 'Inactive' ? 'selected' : '' %>>Inactive</option>
+    </select>
+  </div>
+  <div>
+    <label class="block text-sm font-medium">Hire date</label>
+    <input
+      class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-slate-900 focus:outline-none"
+      type="date"
+      name="hire_date"
+      value="<%= employee.hire_date || '' %>"
+    />
+  </div>
+</div>
+
+<div class="mt-4">
+  <label class="block text-sm font-medium">Notes</label>
+  <textarea
+    class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-slate-900 focus:outline-none"
+    rows="4"
+    name="notes"
+  ><%= employee.notes || '' %></textarea>
+</div>
+
